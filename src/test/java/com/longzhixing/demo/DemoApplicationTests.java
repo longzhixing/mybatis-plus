@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 @SpringBootTest
@@ -61,5 +63,38 @@ class DemoApplicationTests {
         user.setName("狼之心");
         user.setEmail("123@langzhixing.com");
         userMapper.updateById(user); //更新用户
+    }
+
+    /**
+     * 根据id查询用户
+     */
+    @Test
+    void testSelectById(){
+        // 根据id查询用户
+        User user = userMapper.selectById(1l);
+        System.out.println(user);
+    }
+
+    /**
+     * 根据用户id批量查询多个用户
+     */
+    @Test
+    void testSlectByBatchId(){
+        //查询用户id 是 1，2，3的用户，传入一个用户id集合
+        List<User> userList = userMapper.selectBatchIds(Arrays.asList(1,2,3));
+        userList.forEach(System.out::println);
+    }
+
+    /**
+     * 根据条件查询，使用Map操作
+     */
+    @Test
+    void testSelectByMap(){
+        HashMap<String, Object> map = new HashMap<>();
+        //根据姓名和年龄查询
+        map.put("name","狼之心");
+        map.put("age",4);
+        List<User> userList = userMapper.selectByMap(map);
+        userList.forEach(System.out::println);
     }
 }
