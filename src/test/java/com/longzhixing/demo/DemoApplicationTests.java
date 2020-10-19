@@ -72,7 +72,7 @@ class DemoApplicationTests {
     @Test
     void testSelectById(){
         // 根据id查询用户
-        User user = userMapper.selectById(1l);
+        User user = userMapper.selectById(1317002051340804097l);
         System.out.println(user);
     }
 
@@ -100,7 +100,7 @@ class DemoApplicationTests {
     }
 
     /**
-     * 测试分面
+     * 测试分页
      */
     @Test
     void testPage(){
@@ -110,4 +110,13 @@ class DemoApplicationTests {
         userMapper.selectPage(page,null);
         page.getRecords().forEach(System.out::println);
     }
+
+    /**
+     * 逻辑删除，并没有真正删除，只是修改删除状态
+     */
+    @Test
+    void testDeleteById(){
+        userMapper.deleteById(1317002051340804097l);
+    }
+
 }
