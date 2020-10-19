@@ -1,5 +1,6 @@
 package com.longzhixing.demo;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.longzhixing.demo.mapper.UserMapper;
 import com.longzhixing.demo.pojo.User;
 import org.junit.jupiter.api.Test;
@@ -96,5 +97,17 @@ class DemoApplicationTests {
         map.put("age",4);
         List<User> userList = userMapper.selectByMap(map);
         userList.forEach(System.out::println);
+    }
+
+    /**
+     * 测试分面
+     */
+    @Test
+    void testPage(){
+        // 参数1：第2页，参数2：每页显示2条
+        Page<User> page = new Page<>(2,2);
+        //参数1：分页，参数2：查询条件，没有条件传入 null
+        userMapper.selectPage(page,null);
+        page.getRecords().forEach(System.out::println);
     }
 }
